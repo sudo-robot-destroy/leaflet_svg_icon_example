@@ -52,22 +52,21 @@
 			iconSize: [50, 50],
 			iconAnchor: [25, 25],
 			})
-		
-		const test = L.marker([51.5, -0.09], { icon: svgIcon }).addTo(map);	
+
+		const test = L.marker([51.5, -0.09], { icon: svgIcon }).addTo(map);
 	});
 
-	// Here we grab the text that is the function in the svg and then call it. 
-	function callUpdateDial(degree) {
-			const script = document.querySelector('.my-icon svg').querySelector('#script1');
-			const updateDialFunction = new Function('degree', script.textContent + '; update_dial(degree);');
-			updateDialFunction(degree);
-        }		
+    function update_dial(degree=0) {
+        var dial = document.querySelector('.my-icon svg').querySelector("#dial");
+        var d = dial.getAttribute("d");
+        dial.setAttribute("transform", `rotate(${degree} 115.87487 103.9918)`);
+    };
 
 		var currentDegree = 0; 
 		setInterval(() => {
 			currentDegree = (currentDegree + 10) % 360;
-			callUpdateDial(currentDegree);
-		}, 500); 	
+			update_dial(currentDegree);
+		}, 500);
 
 	// function updateSVGSize() {
     //     const zoom = map.getZoom();
