@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<base target="_top">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+
 	<title>Quick Start - Leaflet</title>
-	
+
 	<!--<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />-->
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+		integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+		integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 	<style>
-		html, body {
+		html,
+		body {
 			height: 100%;
 			margin: 0;
 		}
+
 		.leaflet-container {
 			height: 400px;
 			width: 600px;
@@ -25,64 +30,54 @@
 		}
 	</style>
 </head>
+
 <body>
+	<div id="map" style="width: 600px; height: 400px;"></div>
+	<script src="test_gauge.js"></script>
+	<script>
+		const map = L.map('map').setView([51.505, -0.09], 13);
 
+		const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+		}).addTo(map);
 
+		async function loadSVG(url) {
+			const response = await fetch(url);
+			const svgText = await response.text();
+			return svgText;
+		}
 
-<div id="map" style="width: 600px; height: 400px;"></div>
-<script>
-
-	const map = L.map('map').setView([51.505, -0.09], 13);
-
-	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		maxZoom: 19,
-		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-	}).addTo(map);
-
-	async function loadSVG(url) {
-		const response = await fetch(url); 
-		const svgText = await response.text(); 
-		return svgText; 
-	}
-
-	loadSVG('http://localhost:8000/test_gauge.svg').then(svgContent => {
-		svgIcon = L.divIcon({
-			className: 'my-icon',
-			html: svgContent,
-			iconSize: [50, 50],
-			iconAnchor: [25, 25],
+		loadSVG('http://localhost:8000/test_gauge.svg').then(svgContent => {
+			svgIcon = L.divIcon({
+				className: 'my-icon',
+				html: svgContent,
+				iconSize: [50, 50],
+				iconAnchor: [25, 25],
 			})
+			// const test = L.marker([51.5, -0.09], { icon: svgIcon }).addTo(map);
+			const gauge1 = L.gaugeMarker([51.5, -0.09], { icon: svgIcon }).addTo(map);
 
-		const test = L.marker([51.5, -0.09], { icon: svgIcon }).addTo(map);
-	});
+			var currentDegree = 0;
+			setInterval(() => {
+				currentDegree = (currentDegree + 10) % 360;
+				gauge1.update_dial(currentDegree);
+			}, 500);
+		});
 
-    function update_dial(degree=0) {
-        var dial = document.querySelector('.my-icon svg').querySelector("#dial");
-        var d = dial.getAttribute("d");
-        dial.setAttribute("transform", `rotate(${degree} 115.87487 103.9918)`);
-    };
+		// function updateSVGSize() {
+		//     const zoom = map.getZoom();
+		// 	console.log(zoom);
+		//     const scale = Math.pow(2, zoom) / 2; // Adjust this factor based on your needs
+		//     const svgElement = document.querySelector('.my-icon svg');
+		//     svgElement.setAttribute('width', 50 * scale);
+		//     svgElement.setAttribute('height', 50 * scale);
+		// }
 
-		var currentDegree = 0; 
-		setInterval(() => {
-			currentDegree = (currentDegree + 10) % 360;
-			update_dial(currentDegree);
-		}, 500);
+		// map.on('zoomend', updateSVGSize);
+		// updateSVGSize(); // Initial size
 
-	// function updateSVGSize() {
-    //     const zoom = map.getZoom();
-	// 	console.log(zoom);
-    //     const scale = Math.pow(2, zoom) / 2; // Adjust this factor based on your needs
-    //     const svgElement = document.querySelector('.my-icon svg');
-    //     svgElement.setAttribute('width', 50 * scale);
-    //     svgElement.setAttribute('height', 50 * scale);
-    // }
-
-    // map.on('zoomend', updateSVGSize);
-    // updateSVGSize(); // Initial size
-		
-</script>
-
-
-
+	</script>
 </body>
+
 </html>
