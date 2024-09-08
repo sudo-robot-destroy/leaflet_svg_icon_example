@@ -2,15 +2,16 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="186.83943"
-   height="186.83943"
-   viewBox="0 0 49.4346 49.4346"
+   width="8.8339787mm"
+   height="8.8339787mm"
+   viewBox="0 0 55.017852 55.017852"
    version="1.1"
    id="svg1"
    sodipodi:docname="test_gauge.svg"
    inkscape:version="1.3.2 (1:1.3.2+202311252150+091e20ef0f)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
@@ -23,9 +24,9 @@
      inkscape:pagecheckerboard="false"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
-     inkscape:zoom="2.9243394"
-     inkscape:cx="98.825738"
-     inkscape:cy="76.598496"
+     inkscape:zoom="8.3896543"
+     inkscape:cx="68.953973"
+     inkscape:cy="33.851216"
      inkscape:window-width="1850"
      inkscape:window-height="1016"
      inkscape:window-x="0"
@@ -33,12 +34,13 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
      showgrid="false"
-     showguides="true">
+     showguides="true"
+     inkscape:clip-to-page="false">
     <inkscape:grid
        id="grid2"
        units="mm"
-       originx="0"
-       originy="0"
+       originx="2.7916251"
+       originy="2.7916249"
        spacingx="1"
        spacingy="1"
        empcolor="#0099e5"
@@ -60,8 +62,8 @@
        refY="0"
        orient="auto-start-reverse"
        inkscape:stockid="Triangle arrow"
-       markerWidth="1"
-       markerHeight="1"
+       markerWidth="0.7"
+       markerHeight="0.7"
        viewBox="0 0 1 1"
        inkscape:isstock="true"
        inkscape:collect="always"
@@ -72,19 +74,69 @@
          d="M 5.77,0 -2.88,5 V -5 Z"
          id="path135" />
     </marker>
+    <linearGradient
+       id="linearGradient6"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#fefefe;stop-opacity:1;"
+         offset="0"
+         id="stop7" />
+      <stop
+         style="stop-color:#fefefe;stop-opacity:0.6253866;"
+         offset="1"
+         id="stop8" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient1"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#0a00e3;stop-opacity:0.5778181;"
+         offset="0"
+         id="stop2" />
+      <stop
+         style="stop-color:#0800e3;stop-opacity:1;"
+         offset="1"
+         id="stop1" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1"
+       id="radialGradient2"
+       cx="115.87487"
+       cy="103.9918"
+       fx="115.87487"
+       fy="103.9918"
+       r="24.7173"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6"
+       id="linearGradient8"
+       x1="112.30336"
+       y1="92.946121"
+       x2="119.44638"
+       y2="92.946121"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-91.15757,-79.274498)">
+     transform="translate(-88.365945,-76.482873)">
+    <circle
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.16437;stroke-dasharray:none;stroke-opacity:1"
+       id="path2"
+       cx="115.87487"
+       cy="103.9918"
+       r="27.426741" />
     <path
-       id="path1"
-       style="fill:#e3c800;fill-opacity:1;stroke-width:0.177;stroke-opacity:0.0588235"
+       id="centerCircle"
+       style="fill:url(#radialGradient2);stroke-width:0.177;stroke-opacity:0.0588235"
        d="m 140.59217,103.9918 c 0,13.65099 -11.06631,24.7173 -24.7173,24.7173 -13.65099,0 -24.7173,-11.06631 -24.7173,-24.7173 -1e-6,-13.650989 11.06631,-24.717302 24.7173,-24.717302 13.65099,0 24.7173,11.066313 24.7173,24.717302 z"
        sodipodi:nodetypes="sssss" />
     <path
-       style="fill:#e3c800;fill-opacity:0.2;stroke:#000000;stroke-width:1.16045;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Triangle)"
+       style="fill:#e3c800;fill-opacity:0.2;stroke:url(#linearGradient8);stroke-width:2.31353915;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Triangle)"
        d="M 115.87487,103.9918 V 86.021288"
        id="dial"
        sodipodi:nodetypes="cc"

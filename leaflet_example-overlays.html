@@ -42,23 +42,12 @@
 			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 		}).addTo(map);
 
-		function loadSVGSync(url) {
-			const xhr = new XMLHttpRequest();
-			xhr.open('GET', url, false);
-			xhr.send();
-			if (xhr.status === 200) {
-				return xhr.responseText;
-			} else {
-				throw new Error(`Failed to load SVG: ${xhr.status}`);
-			}
-		}
-
-		const svgContent = loadSVGSync('http://localhost:8000/test_gauge.svg');
+		const svgElement = loadSVGSync('http://localhost:8000/test_gauge.svg');
 		const svgIcon = L.divIcon({
 			className: 'my-icon',
-			html: svgContent,
-			iconSize: [50, 50],
-			iconAnchor: [25, 25],
+			html: svgElement,
+			iconSize: [40, 40],
+			iconAnchor: [20, 20],
 		})
 
 		const gauge1 = L.gaugeMarker([51.5, -0.09], { icon: svgIcon }).addTo(map);
@@ -68,19 +57,6 @@
 			currentDegree = (currentDegree + 10) % 360;
 			gauge1.update_dial(currentDegree);
 		}, 500);
-
-		// function updateSVGSize() {
-		//     const zoom = map.getZoom();
-		// 	console.log(zoom);
-		//     const scale = Math.pow(2, zoom) / 2; // Adjust this factor based on your needs
-		//     const svgElement = document.querySelector('.my-icon svg');
-		//     svgElement.setAttribute('width', 50 * scale);
-		//     svgElement.setAttribute('height', 50 * scale);
-		// }
-
-		// map.on('zoomend', updateSVGSize);
-		// updateSVGSize(); // Initial size
-
 	</script>
 </body>
 
