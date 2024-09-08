@@ -42,28 +42,32 @@
 			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 		}).addTo(map);
 
-		async function loadSVG(url) {
-			const response = await fetch(url);
-			const svgText = await response.text();
-			return svgText;
+		function loadSVGSync(url) {
+			const xhr = new XMLHttpRequest();
+			xhr.open('GET', url, false);
+			xhr.send();
+			if (xhr.status === 200) {
+				return xhr.responseText;
+			} else {
+				throw new Error(`Failed to load SVG: ${xhr.status}`);
+			}
 		}
 
-		loadSVG('http://localhost:8000/test_gauge.svg').then(svgContent => {
-			svgIcon = L.divIcon({
-				className: 'my-icon',
-				html: svgContent,
-				iconSize: [50, 50],
-				iconAnchor: [25, 25],
-			})
-			// const test = L.marker([51.5, -0.09], { icon: svgIcon }).addTo(map);
-			const gauge1 = L.gaugeMarker([51.5, -0.09], { icon: svgIcon }).addTo(map);
+		const svgContent = loadSVGSync('http://localhost:8000/test_gauge.svg');
+		const svgIcon = L.divIcon({
+			className: 'my-icon',
+			html: svgContent,
+			iconSize: [50, 50],
+			iconAnchor: [25, 25],
+		})
 
-			var currentDegree = 0;
-			setInterval(() => {
-				currentDegree = (currentDegree + 10) % 360;
-				gauge1.update_dial(currentDegree);
-			}, 500);
-		});
+		const gauge1 = L.gaugeMarker([51.5, -0.09], { icon: svgIcon }).addTo(map);
+
+		var currentDegree = 0;
+		setInterval(() => {
+			currentDegree = (currentDegree + 10) % 360;
+			gauge1.update_dial(currentDegree);
+		}, 500);
 
 		// function updateSVGSize() {
 		//     const zoom = map.getZoom();
